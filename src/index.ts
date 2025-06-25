@@ -1,12 +1,12 @@
 import { AutoRouter, cors } from 'itty-router'
 import { generateHash } from 'supergeneric'
-import { withLength } from './middleware'
+import { withLength, withHelp } from './middleware'
 import { jsonOrText } from './responseHandlers'
 
 const { preflight, corsify } = cors()
 
 const router = AutoRouter({
-  before: [preflight, withLength],
+  before: [preflight, withHelp, withLength],
   finally: [corsify],
   format: jsonOrText,
 })
@@ -20,7 +20,6 @@ router
   }))
   .get('/numeric/:length?', withLength, ({ length }) => generateHash(length, {
     alpha: false,
-    // startWithLetter: false,
   }))
   .get('/uppercase/:length?', withLength, ({ length }) => generateHash(length, {
     lower: false,
