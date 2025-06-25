@@ -1,86 +1,92 @@
 import { type IRequest, json } from 'itty-router'
 
+type Example = {
+  path: string
+  response: string
+}
+
 interface RouteHelp {
   path: string
   description: string
   parameters?: {
     [key: string]: string
   }
-  example?: {
-    path: string
-    response: string
-  }
+  example?: string | Example
 }
 
+// change all examples to length 10
 const API_ROUTES: RouteHelp[] = [
   {
     path: '/:length?',
     description: 'Generate alphanumeric hash',
+    example: 'A1b2C3d4E5',
     parameters: { length: 'Length of hash (default: 10)' },
-    example: { path: '/15', response: 'A1b2C3d4E5f6G7h' }
   },
   {
     path: '/alpha/:length?',
     description: 'Generate alphabetic-only hash',
+    example: 'AbCdEfGhIj',
     parameters: { length: 'Length of hash (default: 10)' },
-    example: { path: '/alpha/8', response: 'AbCdEfGh' }
   },
   {
     path: '/numeric/:length?',
     description: 'Generate numeric-only hash',
+    example: '0542987631',
     parameters: { length: 'Length of hash (default: 10)' },
-    example: { path: '/numeric/6', response: '123456' }
   },
   {
     path: '/uppercase/:length?',
     description: 'Generate uppercase letters only',
+    example: 'JHIWEFGDHJ',
     parameters: { length: 'Length of hash (default: 10)' },
-    example: { path: '/uppercase/5', response: 'ABCDE' }
   },
   {
     path: '/lowercase/:length?',
     description: 'Generate lowercase letters only',
+    example: 'jhiwefgdhj',
     parameters: { length: 'Length of hash (default: 10)' },
-    example: { path: '/lowercase/12', response: 'abcdefghijkl' }
   },
   {
     path: '/uppercase-numeric/:length?',
     description: 'Generate uppercase letters and numbers',
+    example: 'A1B2C3D4E5',
     parameters: { length: 'Length of hash (default: 10)' },
-    example: { path: '/uppercase-numeric/8', response: 'A1B2C3D4' }
   },
   {
     path: '/lowercase-numeric/:length?',
     description: 'Generate lowercase letters and numbers',
+    example: 'a1b2c3d4e5f',
     parameters: { length: 'Length of hash (default: 10)' },
-    example: { path: '/lowercase-numeric/10', response: 'a1b2c3d4e5' }
   },
   {
     path: '/alpha-symbols/:length?',
     description: 'Generate letters and symbols',
+    example: 'A!b@C#d$',
     parameters: { length: 'Length of hash (default: 10)' },
-    example: { path: '/alpha-symbols/7', response: 'A!b@C#d' }
   },
   {
     path: '/only-symbols/:length?',
     description: 'Generate symbols only',
+    example: '!@#$%^&*()',
     parameters: { length: 'Length of hash (default: 10)' },
-    example: { path: '/only-symbols/4', response: '!@#$' }
   },
   {
     path: '/alpha-numeric/:length?',
     description: 'Generate letters and numbers (alias for root)',
+    example: 'A1b2C3d4E5',
     parameters: { length: 'Length of hash (default: 10)' },
-    example: { path: '/alpha-numeric/9', response: 'A1b2C3d4E' }
   },
   {
     path: '/from/:characters/:length?',
     description: 'Generate hash from custom character set',
+    example: {
+      path: '/from/ABC',
+      response: 'ABACCAACBB',
+    },
     parameters: {
       characters: 'Custom character set to use',
       length: 'Length of hash (default: 10)'
     },
-    example: { path: '/from/ABC/10', response: 'ABCCCAACBB' }
   }
 ]
 
