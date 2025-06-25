@@ -98,47 +98,47 @@ export const withHelp = (req: IRequest) => {
     }
 
     const matchedRoute = API_ROUTES.find(route => {
-      if (route.path === '/:length?' && (/^\/\d+$/.test(currentPath) || currentPath === '/')) {
+      if (route.path === '/:length?' && (/^\/\d*$/.test(currentPath) || currentPath === '/')) {
         return true
       }
 
-      if (route.path === '/alpha/:length?' && (/^\/alpha(?:\/\d+)?$/.test(currentPath))) {
+      if (route.path === '/alpha/:length?' && (/^\/alpha(?:\/\d*)?$/.test(currentPath))) {
         return true
       }
 
-      if (route.path === '/numeric/:length?' && (/^\/numeric(?:\/\d+)?$/.test(currentPath))) {
+      if (route.path === '/numeric/:length?' && (/^\/numeric(?:\/\d*)?$/.test(currentPath))) {
         return true
       }
 
-      if (route.path === '/uppercase/:length?' && (/^\/uppercase(?:\/\d+)?$/.test(currentPath))) {
+      if (route.path === '/uppercase/:length?' && (/^\/uppercase(?:\/\d*)?$/.test(currentPath))) {
         return true
       }
 
-      if (route.path === '/lowercase/:length?' && (/^\/lowercase(?:\/\d+)?$/.test(currentPath))) {
+      if (route.path === '/lowercase/:length?' && (/^\/lowercase(?:\/\d*)?$/.test(currentPath))) {
         return true
       }
 
-      if (route.path === '/uppercase-numeric/:length?' && (/^\/uppercase-numeric(?:\/\d+)?$/.test(currentPath))) {
+      if (route.path === '/uppercase-numeric/:length?' && (/^\/uppercase-numeric(?:\/\d*)?$/.test(currentPath))) {
         return true
       }
 
-      if (route.path === '/lowercase-numeric/:length?' && (/^\/lowercase-numeric(?:\/\d+)?$/.test(currentPath))) {
+      if (route.path === '/lowercase-numeric/:length?' && (/^\/lowercase-numeric(?:\/\d)?$/.test(currentPath))) {
         return true
       }
 
-      if (route.path === '/alpha-symbols/:length?' && (/^\/alpha-symbols(?:\/\d+)?$/.test(currentPath))) {
+      if (route.path === '/alpha-symbols/:length?' && (/^\/alpha-symbols(?:\/\d*)?$/.test(currentPath))) {
         return true
       }
 
-      if (route.path === '/only-symbols/:length?' && (/^\/only-symbols(?:\/\d+)?$/.test(currentPath))) {
+      if (route.path === '/only-symbols/:length?' && (/^\/only-symbols(?:\/\d*)?$/.test(currentPath))) {
         return true
       }
 
-      if (route.path === '/alpha-numeric/:length?' && (/^\/alpha-numeric(?:\/\d+)?$/.test(currentPath))) {
+      if (route.path === '/alpha-numeric/:length?' && (/^\/alpha-numeric(?:\/\d*)?$/.test(currentPath))) {
         return true
       }
 
-      if (route.path === '/from/:characters/:length?' && (/^\/from\/[^/]+(?:\/\d+)?$/.test(currentPath))) {
+      if (route.path === '/from/:characters/:length?' && (/^\/from\/[^/]+(?:\/\d*)?$/.test(currentPath))) {
         return true
       }
 
