@@ -1,7 +1,9 @@
-import { AutoRouter, cors } from 'itty-router'
+import { AutoRouter, cors, error } from 'itty-router'
 import { generateHash } from 'supergeneric'
 import { withLength, withHelp } from './middleware'
 import { jsonOrText } from './responseHandlers'
+import { v4 as uuidv4 } from '@lukeed/uuid/secure'
+import { nanoid } from 'nanoid'
 
 const { preflight, corsify } = cors()
 
@@ -12,6 +14,8 @@ const router = AutoRouter({
 })
 
 router
+  .get('/uuid', () => uuidv4())
+  .get('/nanoid', () => nanoid())
   .get('/alpha/:length?', withLength, ({ length }) => generateHash(length, {
     numeric: false,
   }))

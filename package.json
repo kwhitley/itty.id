@@ -16,7 +16,9 @@
 		"wrangler": "^4.20.5"
 	},
 	"dependencies": {
+		"@lukeed/uuid": "^2.0.1",
 		"itty-router": "^5.0.18",
+		"nanoid": "^5.1.5",
 		"supergeneric": "^4.0.2"
 	}
 }

@@ -17,6 +17,16 @@ interface RouteHelp {
 // change all examples to length 10
 const API_ROUTES: RouteHelp[] = [
   {
+    path: '/uuid',
+    description: 'Generate UUID',
+    example: '123e4567-e89b-12d3-a456-426614174000',
+  },
+  {
+    path: '/nanoid',
+    description: 'Generate nanoid',
+    example: '123e4567-e89b-12d3-a456-426614174000',
+  },
+  {
     path: '/:length?',
     description: 'Generate alphanumeric hash',
     example: 'A1b2C3d4E5',
@@ -87,7 +97,7 @@ const API_ROUTES: RouteHelp[] = [
       characters: 'Custom character set to use',
       length: 'Length of hash (default: 10)'
     },
-  }
+  },
 ]
 
 export const withHelp = (req: IRequest) => {
@@ -145,6 +155,14 @@ export const withHelp = (req: IRequest) => {
       }
 
       if (route.path === '/from/:characters/:length?' && (/^\/from\/[^/]+(?:\/\d*)?$/.test(currentPath))) {
+        return true
+      }
+
+      if (route.path === '/uuid' && currentPath === '/uuid') {
+        return true
+      }
+
+      if (route.path === '/nanoid' && currentPath === '/nanoid') {
         return true
       }
 
