@@ -4,6 +4,7 @@ import { withLength, withHelp } from './middleware'
 import { jsonOrText } from './responseHandlers'
 import { v4 as uuidv4 } from '@lukeed/uuid/secure'
 import { nanoid } from 'nanoid'
+import { typeid } from 'typeid-js'
 
 const { preflight, corsify } = cors()
 
@@ -16,6 +17,10 @@ const router = AutoRouter({
 router
   .get('/uuid', () => uuidv4())
   .get('/nanoid', () => nanoid())
+  .get('/typeid/:prefix?', ({ prefix }) => {
+    if (prefix?.startsWith(':')) prefix = undefined
+    return typeid(prefix).toString()
+  })
   .get('/alpha/:length?', withLength, ({ length }) => generateHash(length, {
     numeric: false,
   }))

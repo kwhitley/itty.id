@@ -27,6 +27,11 @@ const API_ROUTES: RouteHelp[] = [
     example: '123e4567-e89b-12d3-a456-426614174000',
   },
   {
+    path: '/typeid/:prefix?',
+    description: 'Generate typeid',
+    example: '123e4567-e89b-12d3-a456-426614174000',
+  },
+  {
     path: '/:length?',
     description: 'Generate alphanumeric hash',
     example: 'A1b2C3d4E5',
@@ -163,6 +168,10 @@ export const withHelp = (req: IRequest) => {
       }
 
       if (route.path === '/nanoid' && currentPath === '/nanoid') {
+        return true
+      }
+
+      if (route.path === '/typeid/:prefix?' && (/^\/typeid(?:\/\d*)?$/.test(currentPath))) {
         return true
       }
 
