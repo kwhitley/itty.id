@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid'
 import { generateHash } from 'supergeneric'
 import { typeid } from 'typeid-js'
 import * as uuid from 'uuid'
-import { JUST_ROUTES, withHelp, withLength } from './middleware'
+import { HELP_DOCS, withHelp, withLength } from './middleware'
 import { jsonOrText } from './responseHandlers'
 
 const { preflight, corsify } = cors()
@@ -91,11 +91,12 @@ router
   .get('/numeric/:length?', withLength, ({ length }) => generateHash(length, {
     numeric: true
   }))
-  .get('/:length?', ({ params, query }) => {
+  .get('/:length', ({ params, query }) => {
     // @ts-expect-error
     if (!isNaN(params.length ?? query.length)) {
       return generateHash(Number(params.length ?? query.length))
     }
   })
+  .get('/', () => HELP_DOCS)
 
 export default { ...router }

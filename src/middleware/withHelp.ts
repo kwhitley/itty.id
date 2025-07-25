@@ -136,12 +136,11 @@ const API_ROUTES: RouteHelp[] = [
 
 export const JUST_ROUTES = API_ROUTES.map(r => r.path)
 
+export const HELP_DOCS = {
+  'What is this?': 'itty.id is a random ID generator API, supporting various ID formats and lengths.',
+  routes: API_ROUTES,
+}
+
 export const withHelp = (req: IRequest) => {
-  if (req.query.help !== undefined) {
-    return {
-      service: 'itty.id - Random Hash Generation API',
-      usage: 'Add ?help to any endpoint for specific help',
-      routes: API_ROUTES
-    }
-  }
+  if (req.query.help !== undefined) return HELP_DOCS
 }
