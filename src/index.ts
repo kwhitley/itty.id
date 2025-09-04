@@ -1,22 +1,23 @@
-import { AutoRouter, cors, error } from 'itty-router'
+import { AutoRouter, cors, error, json } from 'itty-router'
 import { nanoid } from 'nanoid'
 import { generateHash } from 'supergeneric'
 import { typeid } from 'typeid-js'
 import * as uuid from 'uuid'
-import { HELP_DOCS, withHelp, withLength } from './middleware'
+import { withHelp, withLength } from './middleware'
 import { jsonOrText } from './responseHandlers'
 
 const { preflight, corsify } = cors()
 
 const router = AutoRouter({
-  before: [preflight, withHelp, withLength],
+  before: [preflight, withLength],
   finally: [corsify],
-  format: jsonOrText,
   missing: () => error(404, {
     error: 'Not found',
     help: '/?help',
   }),
 })
+
+router.before?.push(withHelp(router))
 
 router
   .get('/uuid', () => uuid.v4())
@@ -97,6 +98,5 @@ router
       return generateHash(Number(params.length ?? query.length))
     }
   })
-  .get('/', () => HELP_DOCS)
 
 export default { ...router }
